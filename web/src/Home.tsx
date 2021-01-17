@@ -1,39 +1,27 @@
-import React, { useEffect, useState, FormEvent, ChangeEvent } from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
 import {
-  Input,
   FormControl,
-  FormGroup,
   Button,
-  Grid,
   InputLabel,
   Select,
+  MenuItem,
   TextField,
 } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SendIcon from '@material-ui/icons/Send';
+import MyModal from './components/MyModal';
 import './Home.css';
 
 interface inputSubmit {
   url: string;
   type: string;
 }
-interface dataSubmit {
-  name: string;
-  value: string | number;
-}
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
-    },
-  }),
-);
+// interface dataSubmit {
+//   name: string;
+//   value: string | number;
+// }
+
 function App(): JSX.Element {
-  const classes = useStyles();
-  const [response, setResponse] = useState();
+  // const [response, setResponse] = useState();
   const [state, setState] = useState<inputSubmit>({
     url: '',
     type: 'GET',
@@ -54,6 +42,10 @@ function App(): JSX.Element {
   }
   return (
     <div className="app">
+      <MyModal
+        title="ATENÇÃO"
+        body="Este site ainda está em desenvolvimento, ok?!"
+      />
       <div id="title" className="text-center">
         <p id="title-top" className="h1">
           API TESTER
@@ -89,8 +81,8 @@ function App(): JSX.Element {
                     id: 'select-type',
                   }}
                 >
-                  <option value="GET">GET</option>
-                  <option value="POST">POST</option>
+                  <MenuItem value="GET">GET</MenuItem>
+                  <MenuItem value="POST">POST</MenuItem>
                 </Select>
               </FormControl>
             </div>

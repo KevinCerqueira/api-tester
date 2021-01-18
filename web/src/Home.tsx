@@ -24,7 +24,7 @@ function App(): JSX.Element {
   // const [response, setResponse] = useState();
   const [state, setState] = useState<inputSubmit>({
     url: '',
-    type: 'GET',
+    type: '',
   });
   const handleChange: any = (
     event: ChangeEvent<{ name?: string; value: unknown }>,
@@ -65,11 +65,7 @@ function App(): JSX.Element {
         <form onSubmit={handleSumbit} noValidate autoComplete="off">
           <div className="flex-container">
             <div className="flex-item flex-grow-0">
-              <FormControl
-                id="form-control"
-                variant="outlined"
-                className="w-100"
-              >
+              <FormControl id="form-control" variant="outlined">
                 <InputLabel htmlFor="select-type">Type</InputLabel>
                 <Select
                   native
@@ -82,6 +78,7 @@ function App(): JSX.Element {
                     id: 'select-type',
                   }}
                 >
+                  <option value=""> </option>
                   <option value="GET">GET</option>
                   <option value="POST">POST</option>
                 </Select>

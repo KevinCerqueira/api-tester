@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useEffect, useState, FormEvent, ChangeEvent } from 'react';
 import {
   Input,

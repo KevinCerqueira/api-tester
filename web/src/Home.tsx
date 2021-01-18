@@ -1,12 +1,16 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+/* eslint-disable prettier/prettier */
+import React, { useEffect, useState, FormEvent, ChangeEvent } from 'react';
 import {
+  Input,
   FormControl,
+  FormGroup,
   Button,
+  Grid,
   InputLabel,
   Select,
-  MenuItem,
   TextField,
 } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SendIcon from '@material-ui/icons/Send';
 import MyModal from './components/MyModal';
 import './Home.css';
@@ -15,13 +19,23 @@ interface inputSubmit {
   url: string;
   type: string;
 }
-// interface dataSubmit {
-//   name: string;
-//   value: string | number;
-// }
-
+interface dataSubmit {
+  name: string;
+  value: string | number;
+}
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  }),
+);
 function App(): JSX.Element {
-  // const [response, setResponse] = useState();
+  const classes = useStyles();
+  const [response, setResponse] = useState();
   const [state, setState] = useState<inputSubmit>({
     url: '',
     type: 'GET',
@@ -53,8 +67,8 @@ function App(): JSX.Element {
         <p id="title-bottom">
           made by{' '}
           <a
+            rel="noopener noreferrer"
             target="_blank"
-            rel="noreferrer"
             href="https://github.com/KevinCerqueira"
           >
             Kevin
@@ -81,8 +95,8 @@ function App(): JSX.Element {
                     id: 'select-type',
                   }}
                 >
-                  <MenuItem value="GET">GET</MenuItem>
-                  <MenuItem value="POST">POST</MenuItem>
+                  <option value="GET">GET</option>
+                  <option value="POST">POST</option>
                 </Select>
               </FormControl>
             </div>

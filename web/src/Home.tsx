@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import SendIcon from '@material-ui/icons/Send';
+import MyModal from './components/MyModal';
 import './Home.css';
 
 interface inputSubmit {
@@ -55,6 +56,10 @@ function App(): JSX.Element {
   }
   return (
     <div className="app">
+      <MyModal
+        title="ATENÇÃO"
+        body="Este site ainda está em desenvolvimento, ok?!"
+      />
       <div id="title" className="text-center">
         <p id="title-top" className="h1">
           API TESTER
@@ -62,8 +67,8 @@ function App(): JSX.Element {
         <p id="title-bottom">
           made by{' '}
           <a
+            rel="noopener noreferrer"
             target="_blank"
-            rel="noreferrer"
             href="https://github.com/KevinCerqueira"
           >
             Kevin

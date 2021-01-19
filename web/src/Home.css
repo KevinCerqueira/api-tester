@@ -13,15 +13,18 @@
   .app {
     width: 100% !important;
   }
-  #form-control{
+  #form-control {
     width: 100% !important;
+  }
+  #container-chips .flex-item {
+    margin: 0% !important;
   }
 }
 .app {
   width: 600px;
 }
-#title{
-    align-items: center !important;
+#title {
+  align-items: center !important;
 }
 #title-top {
   color: #fff;
@@ -36,6 +39,29 @@
 #title-bottom a {
   color: rgb(0, 50, 15, 1);
   background-color: #fff;
+}
+.sections {
+  flex-direction: column !important;
+}
+.circular-progress {
+  /* width: auto !important; */
+  color: #212121 !important;
+}
+#container-chips {
+  flex-direction: row !important;
+}
+#chip-status{
+  align-self: center !important;
+  align-items: center !important;
+}
+#section-response-container {
+  flex-direction: column !important;
+}
+#section-return {
+  flex: 2;
+}
+#section-status {
+  margin: 1%;
 }
 .w-100 {
   width: 100% !important;

@@ -21,7 +21,7 @@
   }
 }
 .app {
-  width: 600px;
+  width: 800px;
 }
 #title {
   align-items: center !important;
@@ -49,10 +49,6 @@
 }
 #container-chips {
   flex-direction: row !important;
-}
-#chip-status{
-  align-self: center !important;
-  align-items: center !important;
 }
 #section-response-container {
   flex-direction: column !important;

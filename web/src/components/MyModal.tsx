@@ -3,7 +3,12 @@ import React, { useState } from 'react';
 import { Modal, Button } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 
-export default function MyModal(props: any): JSX.Element {
+interface ValuesProps {
+  title: string;
+  body: string;
+}
+
+export default function MyModal(props: ValuesProps): JSX.Element {
   const [open, setOpen] = useState(true);
   const { title, body } = props;
   const handleClose = (): void => {

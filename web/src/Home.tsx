@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import axios from 'axios';
-import MyModal from './components/MyModal';
+import MySnackBar from './components/MySnackBar';
 import './Home.css';
 
 interface InputSubmit {
@@ -44,6 +44,26 @@ function App(): JSX.Element {
     color: '#FFF',
     borderColor: '#FFF',
   });
+
+  // useEffect(() => {
+  //   if (String(dataResponse.statusText) === '') {
+  //     return setStatusStyle({
+  //       color: '#FFF',
+  //       borderColor: '#FFF',
+  //     });
+  //   }
+  //   if (String(dataResponse.statusText) !== 'OK') {
+  //     return setStatusStyle({
+  //       color: '#E83B42',
+  //       borderColor: '#E83B42',
+  //     });
+  //   }
+  //   return setStatusStyle({
+  //     color: '#33ff00',
+  //     borderColor: '#33ff00',
+  //   });
+  // }, [statusStyle, dataResponse]);
+
   const handleChange: any = (
     event: ChangeEvent<{ name?: string; value: unknown }>,
   ) => {
@@ -53,24 +73,6 @@ function App(): JSX.Element {
       [name]: event.target.value,
     });
   };
-  useEffect(() => {
-    if (String(dataResponse.statusText) === '') {
-      setStatusStyle({
-        color: '#FFF',
-        borderColor: '#FFF',
-      });
-    } else if (String(dataResponse.statusText) !== 'OK') {
-      setStatusStyle({
-        color: '#E83B42',
-        borderColor: '#E83B42',
-      });
-    } else {
-      setStatusStyle({
-        color: '#33ff00',
-        borderColor: '#33ff00',
-      });
-    }
-  }, [dataResponse.statusText, statusStyle]);
   async function handleSumbit(event: FormEvent): Promise<void> {
     event.preventDefault();
     setStatusTransaction(true);
@@ -105,14 +107,12 @@ function App(): JSX.Element {
         }
       }
     }
+    // reloadStyleStatus();
     setStatusTransaction(false);
   }
   return (
     <div className="app">
-      <MyModal
-        title="ATENÇÃO"
-        body="Este site ainda está em desenvolvimento, ok?!"
-      />
+      <MySnackBar title="Este site ainda está em desenvolvimento, ok?!" />
       <div id="title" className="text-center">
         <p id="title-top" className="h1">
           API TESTER

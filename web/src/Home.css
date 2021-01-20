@@ -31,6 +31,9 @@
   font-family: Staatliches;
   margin: 0px;
 }
+#return-text-area {
+  color: #ffc72c;
+}
 #title-bottom {
   font-family: 'Didact Gothic';
   color: #fff;

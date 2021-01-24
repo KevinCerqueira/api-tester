@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState, FormEvent, ChangeEvent } from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
 import {
   FormControl,
   Button,
@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import axios from 'axios';
-import MyModal from './components/MyModal';
+import MySnackBar from './components/MySnackBar';
 import './Home.css';
 
 interface InputSubmit {
@@ -23,6 +23,10 @@ interface Response {
   data: Array<string>;
   status: number;
   statusText: string;
+  style: {
+    color: string;
+    borderColor: string;
+  };
 }
 // interface dataSubmit {
 //   name: string;
@@ -30,20 +34,30 @@ interface Response {
 // }
 
 function App(): JSX.Element {
+  const styleDefault = {
+    color: '#FFF',
+    borderColor: '#FFF',
+  };
+  const styleSuccess = {
+    color: '#33ff00',
+    borderColor: '#33ff00',
+  };
+  const styleError = {
+    color: '#E83B42',
+    borderColor: '#E83B42',
+  };
   const [dataResponse, setDataResponse] = useState<Response>({
     data: [],
     status: 0,
     statusText: '',
+    style: styleDefault,
   });
   const [statusTransaction, setStatusTransaction] = useState(false);
   const [state, setState] = useState<InputSubmit>({
     url: '',
     type: '',
   });
-  const [statusStyle, setStatusStyle] = useState({
-    color: '#FFF',
-    borderColor: '#FFF',
-  });
+
   const handleChange: any = (
     event: ChangeEvent<{ name?: string; value: unknown }>,
   ) => {
@@ -53,38 +67,26 @@ function App(): JSX.Element {
       [name]: event.target.value,
     });
   };
-  useEffect(() => {
-    if (String(dataResponse.statusText) === '') {
-      setStatusStyle({
-        color: '#FFF',
-        borderColor: '#FFF',
-      });
-    } else if (String(dataResponse.statusText) !== 'OK') {
-      setStatusStyle({
-        color: '#E83B42',
-        borderColor: '#E83B42',
-      });
-    } else {
-      setStatusStyle({
-        color: '#33ff00',
-        borderColor: '#33ff00',
-      });
-    }
-  }, [dataResponse.statusText, statusStyle]);
   async function handleSumbit(event: FormEvent): Promise<void> {
     event.preventDefault();
     setStatusTransaction(true);
     const { url, type } = state;
     if (type === '') {
+      // eslint-disable-next-line no-alert
       alert('Selecione um tipo de envio!');
     }
     if (url === '') {
+      // eslint-disable-next-line no-alert
       alert('Insira uma API!');
     }
     if (type === 'GET') {
       try {
         await axios.get(url).then((response: any) => {
-          setDataResponse(response);
+          // setDataResponse(response);
+          setDataResponse({
+            ...response,
+            style: styleSuccess,
+          });
         });
       } catch (error) {
         const errorRequest = String(error).substring(7);
@@ -95,12 +97,14 @@ function App(): JSX.Element {
             data: [],
             status: Number(codeError),
             statusText: typeError,
+            style: styleError,
           });
         } else {
           setDataResponse({
             data: [],
             status: 400,
             statusText: errorRequest,
+            style: styleError,
           });
         }
       }
@@ -109,10 +113,7 @@ function App(): JSX.Element {
   }
   return (
     <div className="app">
-      <MyModal
-        title="ATENÇÃO"
-        body="Este site ainda está em desenvolvimento, ok?!"
-      />
+      <MySnackBar title="Este site ainda está em desenvolvimento, ok?!" />
       <div id="title" className="text-center">
         <p id="title-top" className="h1">
           API TESTER
@@ -195,7 +196,7 @@ function App(): JSX.Element {
               <div id="container-chips" className="flex-container">
                 <div className="flex-item text-center">
                   <Chip
-                    style={statusStyle}
+                    style={dataResponse.style}
                     className="chip-status"
                     label={`Status: ${
                       dataResponse.statusText === ''
@@ -207,7 +208,7 @@ function App(): JSX.Element {
                 </div>
                 <div className="flex-item text-center">
                   <Chip
-                    style={statusStyle}
+                    style={dataResponse.style}
                     className="chip-status"
                     label={`Status Text: ${
                       dataResponse.statusText === ''
@@ -222,11 +223,13 @@ function App(): JSX.Element {
             <div id="section-return" className="flex-item">
               <TextField
                 className="btn-block"
-                id="outlined-multiline-static"
+                id="return-text-area"
                 label="Return"
                 multiline
                 rows={4}
-                value={dataResponse.data}
+                disabled
+                // value={dataResponse.data}
+                defaultValue="still not working, wait..."
                 variant="outlined"
               />
             </div>

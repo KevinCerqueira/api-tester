@@ -21,7 +21,7 @@
   }
 }
 .app {
-  width: 600px;
+  width: 800px;
 }
 #title {
   align-items: center !important;
@@ -30,6 +30,9 @@
   color: #fff;
   font-family: Staatliches;
   margin: 0px;
+}
+#return-text-area {
+  color: #ffc72c;
 }
 #title-bottom {
   font-family: 'Didact Gothic';
@@ -49,10 +52,6 @@
 }
 #container-chips {
   flex-direction: row !important;
-}
-#chip-status{
-  align-self: center !important;
-  align-items: center !important;
 }
 #section-response-container {
   flex-direction: column !important;
